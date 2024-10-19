@@ -21,3 +21,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/auth', function (Request $request) {
+    return response()->json(['message' => 'please login first']);
+})->name('auth');

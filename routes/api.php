@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\BusinessController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,10 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('user', UserController::class);
+Route::apiResource('business', BusinessController::class);
 
-Route::get('/auth', function (Request $request) {
+Route::post('update_business/{id}', [BusinessController::class, 'update']);
+
+Route::get('/auth', function () {
     return response()->json(['message' => 'please login first']);
 })->name('auth');

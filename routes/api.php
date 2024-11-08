@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\Business\ServiceController;
+use App\Http\Controllers\ReviewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,9 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('service', ServiceController::class);
     Route::apiResource('booking', BookingsController::class);
     Route::post('update_service/{id}', [ServiceController::class, 'update']);
+    Route::apiResource('review', ReviewsController::class);
+    Route::get('business_reviews/{id}', [ReviewsController::class, 'business_review']);
+    Route::post('update_review/{id}', [ReviewsController::class, 'update']);
 });
 
 Route::post('update_business/{id}', [BusinessController::class, 'update']);

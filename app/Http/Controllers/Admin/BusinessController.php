@@ -11,10 +11,14 @@ class BusinessController extends Controller
 {
     public function index()
     {
-        $businesses = Business::paginate(10);
-        return response()->json($businesses);
+        $businesses = Business::all();
+        return view('businesses', compact('business'));
     }
 
+    public function create()
+    {
+        return view('create_business')
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -30,7 +34,7 @@ class BusinessController extends Controller
         }
 
         Business::create(array_merge($validator->validated()));
-        return response()->json('business is added');
+        return redirect()->back();
     }
 
     public function update(Request $request, $id)
@@ -49,13 +53,13 @@ class BusinessController extends Controller
         }
 
         $business->update(array_merge($validator->validated()));
-        return response()->json('business is update');
+        return redirect()->back();
     }
 
     public function destroy($id)
     {
         $business = Business::findOrFail($id);
         $business -> delete();
-        return response()->json('Business is Deleted');
+        return redirect()->back();
     }
 }

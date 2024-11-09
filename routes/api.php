@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Admin_loginController;
 use App\Http\Controllers\Admin\BusinessController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
@@ -22,11 +23,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
-
-Route::middleware('admin')->group(function(){
-    Route::apiResource('user', UserController::class);
-    Route::apiResource('business', BusinessController::class);
-});
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('service', ServiceController::class);

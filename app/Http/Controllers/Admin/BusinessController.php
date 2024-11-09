@@ -12,13 +12,14 @@ class BusinessController extends Controller
     public function index()
     {
         $businesses = Business::all();
-        return view('businesses', compact('business'));
+        return view('businesses', compact('businesses'));
     }
 
     public function create()
     {
-        return view('create_business')
+        return view('create_business');
     }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -35,6 +36,12 @@ class BusinessController extends Controller
 
         Business::create(array_merge($validator->validated()));
         return redirect()->back();
+    }
+
+    public function edit($id)
+    {
+        $business = Business::find($id);
+        return view('edit_business', compact('business'));
     }
 
     public function update(Request $request, $id)

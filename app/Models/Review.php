@@ -22,7 +22,7 @@ class Review extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function ubusiness(){
+    public function business(){
         return $this->belongsTo(Business::class);
     }
 }
